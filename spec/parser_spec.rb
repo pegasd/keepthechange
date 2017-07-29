@@ -11,10 +11,7 @@ RSpec.describe KeepTheChange::Parser do
 
     expect(parser.parse).to eq({
       '1.0.0' => {
-        changes: {
-          'Added' => '- Luke'
-        },
-        date:    '2017-07-17'
+        'Added' => '- Luke'
       }
     })
   end
@@ -47,24 +44,24 @@ RSpec.describe KeepTheChange::Parser do
 
     expect(parser.parse).to eq({
       '0.2.0' => {
-        changes: {
-          'Added' => "- Awesome feature #1\n- Awesome feature #2",
-          'Fixed' => "- A very serious issue has been resolved.\n- Fixed another very serious issue.\n- Smaller fixes.",
-        },
-        date:    '2017-06-13'
+        'Added' => "- Awesome feature #1\n- Awesome feature #2",
+        'Fixed' => "- A very serious issue has been resolved.\n- Fixed another very serious issue.\n- Smaller fixes.",
       },
       '0.1.1' => {
-        changes: {
-          'Fixed' => "- A bugfix.\n- Another bugfix."
-        },
-        date:    '2017-06-09'
+        'Fixed' => "- A bugfix.\n- Another bugfix."
       },
       '0.1.0' => {
-        changes: {
-          'Added' => '- Lots of shiny new features.'
-        },
-        date:    '2017-06-02'
+        'Added' => '- Lots of shiny new features.'
       }
     })
+  end
+
+  parser = KeepTheChange::Parser.new(changelog: File.read(File.expand_path('spec/fixtures/CHANGELOG.md')))
+  it 'can combine changes from multiple changesets (since)' do
+    expect(parser.combine_changes('0.0.7')).to eq(File.read(File.expand_path('spec/fixtures/0.0.7.md')))
+  end
+
+  it 'can combine changes from multiple changesets (since -> to)' do
+    expect(parser.combine_changes('0.0.8', '0.3.0')).to eq(File.read(File.expand_path('spec/fixtures/0.0.8_0.3.0.md')))
   end
 end

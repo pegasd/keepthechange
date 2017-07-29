@@ -1,4 +1,5 @@
 require 'strscan'
+require 'sem_version'
 
 module KeepTheChange
   class Parser
@@ -18,12 +19,44 @@ module KeepTheChange
         scanner         = StringScanner.new(version_changes)
         scanner.scan_until(@version_header_re)
         version_changes           = parse_version_changes(scanner.pre_match || version_changes)
-        @changelog_hash[match[0]] = {
-          changes: version_changes,
-          date:    match[1],
-        }
+        @changelog_hash[match[0]] = version_changes
       end
       @changelog_hash
+    end
+
+    def combine_changes(since_version, to_version = nil)
+      self.parse if @changelog_hash.empty?
+
+      combined_changes = {}
+      filtered_changes = @changelog_hash
+      if to_version
+        filtered_changes.delete_if { |key, _|
+          SemVersion.new(key) <= SemVersion.new(since_version) ||
+            SemVersion.new(key) > SemVersion.new(to_version)
+        }
+      else
+        filtered_changes.delete_if { |key, _| SemVersion.new(key) <= SemVersion.new(since_version) }
+      end
+
+      filtered_changes.each do |_, changes|
+        changes.each do |section, changes_list|
+          if combined_changes.key? section
+            combined_changes[section] << "\n" << changes_list
+          else
+            combined_changes[section] = changes_list
+          end
+        end
+      end
+
+      output = "## Changes since [#{since_version}]"
+      output << " (and up to [#{to_version}])" if to_version
+
+      combined_changes.each do |section, changes_list|
+        output << "\n\n### #{section}"
+        output << "\n#{changes_list}"
+      end
+
+      output << "\n"
     end
 
     private
