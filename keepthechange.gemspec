@@ -5,7 +5,7 @@ require 'keepthechange/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'keepthechange'
-  spec.version       = Keepthechange::VERSION
+  spec.version       = KeepTheChange::VERSION
   spec.authors       = ['Eugene Piven']
   spec.email         = ['thepegasd@gmail.com']
 

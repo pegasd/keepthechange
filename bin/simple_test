@@ -2,3 +2,6 @@
 
 require 'bundler/setup'
 require 'keepthechange'
+
+ktc = KeepTheChange::Parser.new(File.read '../CHANGELOG.md')
+p ktc.parse
