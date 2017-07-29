@@ -1,38 +1,43 @@
-# Keepthechange
+# KeepTheChange
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/keepthechange`. To experiment with that code, run `bin/console` for an interactive prompt.
+This gem provides an easy-to-use interface for parsing CHANGELOG files that strictly adhere to
+[keep a changelog format](http://keepachangelog.com/).
 
-TODO: Delete this and the text above, and describe your gem
+The idea is loosely based on [vandamme](https://github.com/tech-angels/vandamme) gem, but is supposed to evolve
+into something more strict (in terms of supported formats), but also more feature-rich.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'keepthechange'
+gem 'keepthechange', github: 'pegasd/keepthechange'
 ```
 
 And then execute:
 
     $ bundle
 
-Or install it yourself as:
-
-    $ gem install keepthechange
-
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+changes_hash = KeepTheChange::Parser.new(changelog: File.read('CHANGELOG.md')).parse
+```
+
+This will produce a hash with versions as keys.
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bundle install` to install dependencies. Then, run `bundle exec rake spec` to run the tests. You can also 
+run `bin/simple_test` after putting a `CHANGELOG.md` into the repo directory for a basic parsing test.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in 
+`version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push 
+the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/keepthechange. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+Bug reports, feature requests and pull requests are welcome at [KeepTheChange official repo](https://github.com/pegasd/keepthechange).
 
 ## License
 
@@ -40,4 +45,5 @@ The gem is available as open source under the terms of the [MIT License](http://
 
 ## Code of Conduct
 
-Everyone interacting in the Keepthechange project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/keepthechange/blob/master/CODE_OF_CONDUCT.md).
+Everyone interacting in the Keepthechange project’s codebases, issue trackers, chat rooms and mailing lists is expected to follow the 
+[Code of Conduct](https://github.com/pegasd/keepthechange/blob/master/CODE_OF_CONDUCT.md).
