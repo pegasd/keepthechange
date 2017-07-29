@@ -1,5 +1,8 @@
 # KeepTheChange
 
+[![Build Status](https://travis-ci.org/pegasd/keepthechange.svg?branch=master)](https://travis-ci.org/pegasd/keepthechange)
+[![Coverage Status](https://coveralls.io/repos/github/pegasd/keepthechange/badge.svg)](https://coveralls.io/github/pegasd/keepthechange)
+
 This gem provides an easy-to-use interface for parsing CHANGELOG files that strictly adhere to
 [keep a changelog format](http://keepachangelog.com/).
 
