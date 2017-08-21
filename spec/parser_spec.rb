@@ -9,15 +9,15 @@ RSpec.describe KeepTheChange::Parser do
     MD
     )
 
-    expect(parser.parse).to eq({
+    expect(parser.parse).to eq(
       '1.0.0' => {
         'Added' => '- Luke'
       }
-    })
+    )
   end
 
   it 'can parse Changelog with setext-style headers using custom RE' do
-    parser = KeepTheChange::Parser.new(version_header_re: /^\[(\d+\.\d+\.\d+)\] - (\d{4}-\d{2}-\d{2})\n-+$/, changelog: <<~MD
+    parser = KeepTheChange::Parser.new(version_header_re: /^\[(\d+\.\d+\.\d+)] - (\d{4}-\d{2}-\d{2})\n-+$/, changelog: <<~MD
       [0.2.0] - 2017-06-13
       --------------------
       ### Added
@@ -42,10 +42,10 @@ RSpec.describe KeepTheChange::Parser do
     MD
     )
 
-    expect(parser.parse).to eq({
+    expect(parser.parse).to eq(
       '0.2.0' => {
         'Added' => "- Awesome feature #1\n- Awesome feature #2",
-        'Fixed' => "- A very serious issue has been resolved.\n- Fixed another very serious issue.\n- Smaller fixes.",
+        'Fixed' => "- A very serious issue has been resolved.\n- Fixed another very serious issue.\n- Smaller fixes."
       },
       '0.1.1' => {
         'Fixed' => "- A bugfix.\n- Another bugfix."
@@ -53,7 +53,7 @@ RSpec.describe KeepTheChange::Parser do
       '0.1.0' => {
         'Added' => '- Lots of shiny new features.'
       }
-    })
+    )
   end
 
   parser = KeepTheChange::Parser.new(changelog: File.read(File.expand_path('spec/fixtures/CHANGELOG.md')))
