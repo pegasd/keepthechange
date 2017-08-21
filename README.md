@@ -14,12 +14,20 @@ into something more strict (in terms of supported formats), but also more featur
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'keepthechange', github: 'pegasd/keepthechange'
+gem 'keepthechange', '~> 0.1'
 ```
 
 And then execute:
 
-    $ bundle
+```bash
+$ bundle
+```
+
+Or install it yourself as:
+
+```bash
+$ gem install keepthechange
+```
 
 ## Usage
 
@@ -27,7 +35,9 @@ And then execute:
 changes_hash = KeepTheChange::Parser.new(changelog: File.read('CHANGELOG.md')).parse
 ```
 
-This will produce a hash with versions as keys.
+This will produce a hash where keys are version numbers (e.g. `0.1.0`, `1.0.3`) and values are hashes themselves.
+Those will have headers as keys (e.g. `Added`, `Fixed`) and changesets as corresponding values.
+
 
 ## Development
 
