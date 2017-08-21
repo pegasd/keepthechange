@@ -1,25 +1,19 @@
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'keepthechange/version'
+Gem::Specification.new do |s|
+  s.name        = 'keepthechange'
+  s.version     = '0.1.0'
+  s.homepage    = 'https://github.com/pegasd/keepthechange'
+  s.summary     = 'Changelog parser'
+  s.description = 'Changelog parser (strictly follows keepachangelog.com format)'
+  s.license     = 'MIT'
 
-Gem::Specification.new do |spec|
-  spec.name          = 'keepthechange'
-  spec.version       = KeepTheChange::VERSION
-  spec.authors       = ['Eugene Piven']
-  spec.email         = ['thepegasd@gmail.com']
-  spec.summary       = 'Changelog parser (strictly follows keepachangelog.com format)'
-  spec.homepage      = 'https://github.com/pegasd/keepthechange'
-  spec.license       = 'MIT'
-  spec.files         = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features)/})
-  end
-  spec.bindir        = 'exe'
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ['lib']
+  s.files = Dir['README.md', 'LICENSE', 'CODE_OF_CONDUCT.md', 'CHANGELOG.md', 'lib/**/*.rb']
 
-  spec.add_runtime_dependency 'sem_version', '~> 2.0'
+  s.add_runtime_dependency 'sem_version', '~> 2.0'
 
-  spec.add_development_dependency 'bundler', '~> 1.15'
-  spec.add_development_dependency 'rake', '~> 10.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
+  s.add_development_dependency 'bundler', '~> 1.0'
+  s.add_development_dependency 'rake', '~> 12.0'
+  s.add_development_dependency 'rspec', '~> 3.0'
+
+  s.authors = ['Eugene Piven']
+  s.email   = ['thepegasd@gmail.com']
 end
