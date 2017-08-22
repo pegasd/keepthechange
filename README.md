@@ -31,13 +31,32 @@ $ gem install keepthechange
 
 ## Usage
 
+### Parsed Changes Hash
+
 ```ruby
-changes_hash = KeepTheChange::Parser.new(changelog: File.read('CHANGELOG.md')).parse
+parser = KeepTheChange::Parser.new(changelog: File.read('CHANGELOG.md'))
+changes_hash = parser.parse
 ```
 
 This will produce a hash where keys are version numbers (e.g. `0.1.0`, `1.0.3`) and values are hashes themselves.
 Those will have headers as keys (e.g. `Added`, `Fixed`) and changesets as corresponding values.
 
+### Combine Multiple Changesets
+
+If you only provide one argument to `combine_changes()`, the resulting output will contain changes since that
+version.
+
+```ruby
+File.write('SINCE_0.1.7.md', parser.combine_changes('0.1.7'))
+```
+
+> `0.1.7` itself won't be included in the resulting file.
+
+Specify both the lower and upper bound (again - lower bound is exclusive) to produce output with changes between the versions.
+
+```ruby
+File.write('0.1.7-1.0.3.md', parser.combine_changes('0.1.7', '1.0.3'))
+```
 
 ## Development
 
