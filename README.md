@@ -1,5 +1,6 @@
 # KeepTheChange
 
+[![Gem Version](https://badge.fury.io/rb/keepthechange.svg)](https://badge.fury.io/rb/keepthechange)
 [![Build Status](https://travis-ci.org/pegasd/keepthechange.svg?branch=master)](https://travis-ci.org/pegasd/keepthechange)
 [![Coverage Status](https://coveralls.io/repos/github/pegasd/keepthechange/badge.svg)](https://coveralls.io/github/pegasd/keepthechange)
 
