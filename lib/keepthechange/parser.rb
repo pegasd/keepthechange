@@ -47,11 +47,11 @@ module KeepTheChange
     #
     # @param [String] since_version Version to start parsing from. Changes for this version won't be included.
     # @param [String] to_version Version to stop parsing at.
-    def combine_changes(since_version, to_version = nil)
+    def combine_changes(since_version, to_version = nil, print_header = true)
       parse if @changelog_hash.empty?
 
       combined_changes = {}
-      filtered_changes = @changelog_hash
+      filtered_changes = Marshal.load(Marshal.dump(@changelog_hash))
       if to_version
         filtered_changes.delete_if do |key, _|
           SemVersion.new(key) <= SemVersion.new(since_version) ||
@@ -71,11 +71,16 @@ module KeepTheChange
         end
       end
 
-      output = "## Changes since [#{since_version}]"
-      output << " (and up to [#{to_version}])" if to_version
+      if print_header
+        output = "## Changes since [#{since_version}]"
+        output << " (and up to [#{to_version}])" if to_version
+      else
+        output = ''
+      end
 
       combined_changes.each do |section, changes_list|
-        output << "\n\n### #{section}"
+        output << "\n\n" unless output.empty?
+        output << "### #{section}"
         output << "\n#{changes_list}"
       end
 
