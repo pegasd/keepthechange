@@ -1,12 +1,12 @@
 Gem::Specification.new do |s|
   s.name        = 'keepthechange'
-  s.version     = '0.1.0'
+  s.version     = '0.2.0'
   s.homepage    = 'https://github.com/pegasd/keepthechange'
   s.summary     = 'Changelog parser'
   s.description = 'Changelog parser (strictly follows keepachangelog.com format)'
   s.license     = 'MIT'
 
-  s.files = Dir['README.md', 'LICENSE', 'CODE_OF_CONDUCT.md', 'CHANGELOG.md', 'lib/**/*.rb']
+  s.files = Dir['README.md', 'CHANGELOG.md', 'lib/**/*.rb']
 
   s.add_runtime_dependency 'sem_version', '~> 2.0'
 
