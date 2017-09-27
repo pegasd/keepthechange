@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'keepthechange'
-  s.version     = '0.2.0'
+  s.version     = '0.3.0'
   s.homepage    = 'https://github.com/pegasd/keepthechange'
   s.summary     = 'Changelog parser'
   s.description = 'Changelog parser (strictly follows keepachangelog.com format)'

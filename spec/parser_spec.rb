@@ -69,4 +69,8 @@ RSpec.describe KeepTheChange::Parser do
     result = File.readlines(File.expand_path('spec/fixtures/0.0.8_0.3.0.md')).drop(2).join
     expect(parser.combine_changes('0.0.8', '0.3.0', false)).to eq(result)
   end
+
+  it 'can output delta of changes' do
+    expect(parser.delta_changes('0.0.8', '0.3.0')).to eq(File.read(File.expand_path('spec/fixtures/delta_0.0.8_0.3.0.md')))
+  end
 end

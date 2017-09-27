@@ -87,6 +87,36 @@ module KeepTheChange
       output << "\n"
     end
 
+    # Combine changes for multiple versions. The `since_version` is your `current` version.
+    # This means that changes will start combining from the next version up.
+    #
+    # @param [String] since_version Version to start parsing from. Changes for this version won't be included.
+    # @param [String] to_version Version to stop parsing at.
+    def delta_changes(since_version, to_version = nil)
+      parse if @changelog_hash.empty?
+
+      filtered_changes = Marshal.load(Marshal.dump(@changelog_hash))
+      if to_version
+        filtered_changes.delete_if do |key, _|
+          SemVersion.new(key) <= SemVersion.new(since_version) ||
+            SemVersion.new(key) > SemVersion.new(to_version)
+        end
+      else
+        filtered_changes.delete_if { |key, _| SemVersion.new(key) <= SemVersion.new(since_version) }
+      end
+
+      output = ''
+      filtered_changes.each do |version, changeset|
+        output << "## #{version}\n"
+        changeset.each do |section, changes|
+          output << "### #{section}\n"
+          output << changes << "\n\n"
+        end
+      end
+
+      output
+    end
+
     private
 
     # Parse a changeset for a specific version and return a hash of different kinds of changes.
