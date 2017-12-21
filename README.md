@@ -15,7 +15,7 @@ into something more strict (in terms of supported formats), but also more featur
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'keepthechange', '~> 0.1'
+gem 'keepthechange'
 ```
 
 And then execute:
