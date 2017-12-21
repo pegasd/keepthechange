@@ -71,7 +71,7 @@ RSpec.describe KeepTheChange::Parser do
   end
 
   it 'can output delta of changes (since)' do
-    expect(parser.delta_changes('0.0.8', '0.3.0')).to eq(File.read(File.expand_path('spec/fixtures/delta_0.0.8_0.3.0.md')))
+    expect(parser.delta_changes('0.3.0')).to eq(File.read(File.expand_path('spec/fixtures/delta_0.3.0.md')))
   end
 
   it 'can output delta of changes (since -> to)' do

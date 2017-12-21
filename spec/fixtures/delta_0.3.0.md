@@ -1,4 +1,4 @@
-## [1.0.0] - 2017-06-20
+## 1.0.0
 ### Added
 - New visual identity by @tylerfortune8.
 - Version navigation.
